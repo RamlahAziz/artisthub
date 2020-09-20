@@ -39,6 +39,8 @@ export default function SearchBar() {
     function handleChange(e) {
         e.preventDefault();
         setSearchTerm(e.target.value);
+        setSearchResults(true);
+
         console.log('onChange search term', searchTerm);
     }
 

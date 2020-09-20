@@ -10,10 +10,12 @@ import {
     Link,
     useParams
 } from "react-router-dom";
+import {Image} from "@material-ui/icons";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" >
+        <div className="image"/>
       <SearchBar />
         <Router>
             <Switch>

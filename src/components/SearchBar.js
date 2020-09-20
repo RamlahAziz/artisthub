@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SearchBar() {
-  const baseUrl = `https://rest.bandsintown.com`;
-  const appId = "9c42d4dc9c1397201a4e3dc4d0bb840c";
+  const baseUrl = `https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com`;
+  const appId = "codingbootcamp";
   const classes = useStyles();
   const [artistName, setArtistName] = useState("");
   const count = "3";
@@ -47,16 +47,16 @@ export default function SearchBar() {
   async function searchArtists(searchValue) {
     try {
       const response = await Axios.get(
-        `${baseUrl}/artists/${searchValue}?app_id=${appId}`,
-        {
-          headers: {
-            "X-Requested-With": "XMLHttpRequest",
-          },
-        }
+        `${baseUrl}/artists/${searchValue}?app_id=${appId}`
+        // {
+        //   headers: {
+        //     "X-Requested-With": "XMLHttpRequest",
+        //     "Access-Control-Allow-Origin": "*",
+        //   },
+        // }
       );
-      const data = response.data;
-      console.log("Data returned from API: ", data);
-      return data;
+      searchresults = response.data;
+      console.log("Data returned from API: ", searchresults);
     } catch (error) {
       // If an error occurred we log it to the console
       console.error("Request Failed: ", error);
@@ -85,11 +85,6 @@ export default function SearchBar() {
           </IconButton>
           <div>{console.log(artistName)}</div>
         </Paper>
-      </Grid>
-      <Grid item xs="12">
-        <Typography>
-          {count} results found for {artistName}
-        </Typography>
       </Grid>
 
       <Grid item xs="12">

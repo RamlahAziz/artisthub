@@ -10,11 +10,13 @@ import { Grid, TableCell, TableHead, TableRow } from "@material-ui/core";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
+import Box from '@material-ui/core/Box';
+
 import "fontsource-roboto";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: 300,
   },
   media: {
     height: 0,
@@ -23,15 +25,43 @@ const useStyles = makeStyles((theme) => ({
   table: {
     borderBottom: "none",
   },
-  text: {
+  text:{
     fontFamily: "Roboto",
     textAlign: "left",
-    fontSize: 14,
+    fontSize: 15,
+  },
+  subtext: {
+    fontFamily: "Roboto",
+    textAlign: "left",
+    fontSize: 15,
   },
 }));
 
 export default function ArtistEvents(props) {
+  console.log('Artist Event Details: ',props);
   const classes = useStyles();
+
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ]
+
+  function dateFormat(string){
+    //2020-10-07T19:00:00
+    const date = new Date(string);
+    return date.getDate()+" " + months[date.getMonth()] +", " + date.getFullYear();
+  }
+
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -42,15 +72,19 @@ export default function ArtistEvents(props) {
         <Grid container direction="column" alignItems="flex-start">
           <Grid container direction="row">
             <Grid item xs={6}>
-              <Typography className={classes.text}>
-                Country
-                {"\nPakistan"}
-                {props.country}
+              <Typography fontWeight="fontWeightBold" className={classes.text}>
+                <Box fontWeight="fontWeightBold">
+                  Country
+                </Box>
+                <Box fontWeight="fontWeightLight">{props.event.venue.country}</Box>
               </Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography className={classes.text}>
-                City {"\nIslamabad" + props.city}
+                <Box fontWeight="fontWeightBold" m={0}>
+                  City
+                </Box>
+                <Box fontWeight="fontWeightLight" m={0}>{props.event.venue.city}</Box>
               </Typography>
             </Grid>
           </Grid>
@@ -58,12 +92,14 @@ export default function ArtistEvents(props) {
           <Grid container direction="row">
             <Grid item xs={6}>
               <Typography className={classes.text}>
-                Venue {"\nStadium" + props.venue}
+                <Box fontWeight="fontWeightBold" m={1}>Venue</Box>
+                <Box fontWeight="fontWeightLight" m={0}>{props.event.venue.name}</Box>
               </Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography className={classes.text}>
-                Date {"\n23 Sep 2019" + props.date}
+                <Box fontWeight="fontWeightBold" m={1}>Date</Box>
+                <Box fontWeight="fontWeightLight" m={0}>{dateFormat(props.event.datetime)}</Box>
               </Typography>
             </Grid>
           </Grid>

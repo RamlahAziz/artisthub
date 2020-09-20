@@ -32,36 +32,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SearchBar() {
-  const baseUrl = `https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com`;
-  const appId = "codingbootcamp";
+
   const classes = useStyles();
   const [artistName, setArtistName] = useState("");
+  const [showResults, setShowResults] = React.useState(false);
+  const onClick = () => setShowResults(true);
   const count = "3";
-  let searchresults = "";
-
-  // useEffect(() => {
-  //   //data fetching
-  //   // document.title = `You clicked ${count} times`;
-  // }, [artistName]);
-
-  async function searchArtists(searchValue) {
-    try {
-      const response = await Axios.get(
-        `${baseUrl}/artists/${searchValue}?app_id=${appId}`
-        // {
-        //   headers: {
-        //     "X-Requested-With": "XMLHttpRequest",
-        //     "Access-Control-Allow-Origin": "*",
-        //   },
-        // }
-      );
-      searchresults = response.data;
-      console.log("Data returned from API: ", searchresults);
-    } catch (error) {
-      // If an error occurred we log it to the console
-      console.error("Request Failed: ", error);
-    }
-  }
 
   return (
     <Grid container direction="column" alignItems="flex-start">
@@ -78,7 +54,7 @@ export default function SearchBar() {
           <IconButton
             type="submit"
             className={classes.iconButton}
-            onSubmit={searchArtists(artistName)}
+            // onSubmit={() => }
             aria-label="search"
           >
             <SearchIcon />
@@ -88,7 +64,7 @@ export default function SearchBar() {
       </Grid>
 
       <Grid item xs="12">
-        <SearchResults results={searchresults}></SearchResults>
+        {(artistName=="")?null:<SearchResults searchTerm={artistName}/>}
       </Grid>
       <Grid item xs="12">
         <Typography>{count} upcoming events</Typography>

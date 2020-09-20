@@ -8,8 +8,9 @@ import { red } from "@material-ui/core/colors";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
-    margin: 20,
+    margin: 10,
     textAlign: "left",
+      padding: 10,
   },
   avatar: {
     backgroundColor: red[500],
@@ -20,20 +21,19 @@ const useStyles = makeStyles((theme) => ({
 //<DialogForm patientMy={props.record} doctorMy={props.doctor}/>
 
 export default function ArtistDetails(props) {
-  console.log("Artist Details", props);
-
+  console.log("Artist Details", props.results);
   const classes = useStyles();
-
   return (
+
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="picture" className={classes.avatar}>
-            R
+          <Avatar aria-label="picture" className={classes.avatar} src={props.results.image_url}>
+              {props.results.name?'':props.results.name.charAt(0)}
           </Avatar>
         }
-        title={props.artist}
-        subheader={props.facebook}
+        title={props.results.name}
+        subheader={props.results.facebook_page_url}
       />
     </Card>
   );

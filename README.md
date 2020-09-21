@@ -7,6 +7,9 @@ Then run
 ## API Key
 As Bands In Town API would not work with any string for demo purposes I used API Key = "codingbootcamp" from https://github.com/mariomelchor/iLoveMusic
 
+## Added after Submission
+I had contacted Bands In Town for a Student API https://www.artists.bandsintown.com/support/api-installation and they replied on 21 Sep, 2020 with an API key (b2d0af8ea8bfb7288d2701b2d06e9eae) I can use for 3 months. I am replacing the API key in the project with this one.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

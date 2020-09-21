@@ -36,7 +36,7 @@ export default function SearchResults(props) {
     const [loading, setLoading] = React.useState(true);
     //using a proxy to avoid cors errors
     const baseUrl = `https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com`;
-    const appId = "codingbootcamp";
+    const appId = "b2d0af8ea8bfb7288d2701b2d06e9eae";
 
 
     useEffect(() => {

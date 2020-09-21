@@ -1,28 +1,32 @@
+# Added after Submission
+The following three things were added after submission:
+
+## 1. API Key
+I had contacted Bands In Town for a Student API https://www.artists.bandsintown.com/support/api-installation and they replied on 21 Sep, 2020 with an API key (b2d0af8ea8bfb7288d2701b2d06e9eae) I can use for 3 months. I am replacing the API key in the project with this one.
+
+## 2. Deployment
+Application deployed to https://ramlahaziz.github.io/artisthub
+
+## 3. Improvement
+I admit to procrastinating on this application, and it is not up to standard.
+   a. It does not have test cases
+   b. It does not handle empty search results
+   c. The styling need major improvements
+
+
 ## Run 
-To run this project, clone the github repo and run in the project directory 
-### `npm start` 
+To run this project in development mode, clone the github repo and run in the project directory 
+### `npm install` 
 Then run 
 ### `npm start`
 
 ## API Key
-As Bands In Town API would not work with any string for demo purposes I used API Key = "codingbootcamp" from https://github.com/mariomelchor/iLoveMusic
-
-## Added after Submission
-I had contacted Bands In Town for a Student API https://www.artists.bandsintown.com/support/api-installation and they replied on 21 Sep, 2020 with an API key (b2d0af8ea8bfb7288d2701b2d06e9eae) I can use for 3 months. I am replacing the API key in the project with this one.
+As Bands In Town API would not work with any string for demo purposes I used API Key = "codingbootcamp" from https://github.com/mariomelchor/iLoveMusic before obtaining a Student API.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
 ### `npm test`
 

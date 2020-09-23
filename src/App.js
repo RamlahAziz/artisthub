@@ -1,22 +1,24 @@
 import React from "react";
 import "./App.css";
 import SearchBar from "./components/SearchBar.js";
-import ArtistDetails from "./components/ArtistDetails.js";
 import EventResults from "./components/EventResults";
+import background from "./images/background2.jpg";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
+    //Link,
     useParams
 } from "react-router-dom";
-import {Image} from "@material-ui/icons";
 
 function App() {
   return (
     <div className="App" >
-        <div className="image"/>
-      <SearchBar />
+        <div>
+            {/*<img src={background}/>*/}
+            <SearchBar />
+        </div>
+
         <Router>
             <Switch>
                 {/* <Route path="/" component={SearchBar} /> */}

@@ -1,17 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import Divider from "@material-ui/core/Divider";
-import CardContent from "@material-ui/core/CardContent";
-import {red} from "@material-ui/core/colors";
+
 import Typography from "@material-ui/core/Typography";
-import {Grid, TableCell, TableHead, TableRow} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import ArtistDetails from "./ArtistDetails";
 import EventResults from "./EventResults";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Axios from "axios";
-import {Router} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     text: {
@@ -19,6 +14,17 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         padding: 10,
     },
+    artistResultGrid: {
+        alignContent: "flex-start",
+        alignItems: "flex-start",
+        flexFlow: "row wrap",
+    },
+    root: {
+        display: "flex",
+        flexWrap: 'wrap',
+        alignItems: "left",
+        width: 'fill',
+    }
 
 }));
 
@@ -28,20 +34,34 @@ export default function SearchResults(props) {
 
     // console.log('searchterm',props);
 
-    let count = 0;
-    let temp = []
+    //let count = 0;
+    //let temp = []
     const [searchResults, setSearchResults] = useState([]);
     const [showArtistResults, setShowArtistResults] = useState(true);
     const [selectedArtist, setSelectedArtist] = useState("");
     const [loading, setLoading] = React.useState(true);
     //using a proxy to avoid cors errors
-    const baseUrl = `https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com`;
+    const baseUrl = `https://rest.bandsintown.com`;
     const appId = "b2d0af8ea8bfb7288d2701b2d06e9eae";
 
 
     useEffect(() => {
-        //data fetching whenever searchterm changes
-        searchArtists(props.searchTerm);
+        //data fetching whenever search term changes
+
+        let refinedSearchTerm = props.searchTerm;
+        if (refinedSearchTerm.includes(" ")) {
+            refinedSearchTerm = refinedSearchTerm.replace(/\s/g, "");
+        }
+        if (!refinedSearchTerm || refinedSearchTerm.length === 0) {
+            //ask user for proper input
+            searchResults.length=0;
+            setSearchResults([]);
+            console.log('empty input')
+        } else {
+            searchResults.length=0;
+            setSearchResults([]);
+            searchArtists(refinedSearchTerm).then();
+        }
 
     }, [props.searchTerm]);
 
@@ -56,20 +76,17 @@ export default function SearchResults(props) {
         try {
             const response = await Axios.get(
                 `${baseUrl}/artists/${searchValue}?app_id=${appId}`,
-                {
-                    headers: {
-                        "accept": "application/json",
-                        "Content-Type": "application/x-www-form-urlencoded",
-                        "X-Requested-With": "XMLHttpRequest",
-                        "Access-Control-Allow-Origin": "*",
-                    },
-                }
             );
             const data = response.data;
             console.log("Data returned from API: ", data);
-            searchResults.push(data);
-            setSearchResults(searchResults)
-            console.log('Array of Search Results ', searchResults);
+            if (!data || data.length === 0 || data.hasOwnProperty("error")) {
+                //json object not valid
+            } else {
+                searchResults.push(data);
+                setSearchResults(searchResults)
+            }
+
+            console.log('LATE Array of Search Results ', searchResults);
 
             setLoading(false);
             // return data;
@@ -81,20 +98,20 @@ export default function SearchResults(props) {
 
     return (
         loading ?
-            <div>
+            <div className={classes.root}>
                 <Skeleton animation="wave" variant="text"/>
                 <Skeleton animation="wave" variant="rect"/>
             </div> :
             showArtistResults ?
                 <div>
-                    <Grid container direction="row" alignItems="flex-start">
-                        <Grid item xs={12}>
+                    <Grid className={classes.artistResultGrid} container direction="row" alignItems="flex-start">
+                        <Grid className={classes.artistResultGrid} item xs={12}>
                             <Typography className={classes.text}>
                                 {searchResults.length} result(s) found for "{props.searchTerm}"
                             </Typography>
                         </Grid>
                         {searchResults.map((record) => (
-                            <Grid item xs={4} onClick={(e) => handleClick(e, record)}>
+                            <Grid item key={record.name} xs onClick={(e) => handleClick(e, record)}>
                                 <ArtistDetails results={record}></ArtistDetails>
                             </Grid>
 

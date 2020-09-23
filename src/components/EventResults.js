@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import Divider from "@material-ui/core/Divider";
-import CardContent from "@material-ui/core/CardContent";
-import {red} from "@material-ui/core/colors";
 import Typography from "@material-ui/core/Typography";
-import {Grid, TableCell, TableHead, TableRow} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import ArtistDetails from "./ArtistDetails";
 import Axios from "axios";
@@ -17,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     text: {
         margin: 10,
         padding: 10,
-        fontFamily: "Roboto",
         fontSize: 15,
     },
 
@@ -31,7 +25,7 @@ export default function EventResults(props) {
 
     const [eventResults, setEventResults] = useState([]);
     //using a proxy to avoid cors errors
-    const baseUrl = `https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com`;
+    const baseUrl = `https://rest.bandsintown.com`;
     const appId = "b2d0af8ea8bfb7288d2701b2d06e9eae";
 
 
@@ -46,14 +40,6 @@ export default function EventResults(props) {
         try {
             const response = await Axios.get(
                 `${baseUrl}/artists/${artistName}/events?app_id=${appId}&date=upcoming`,
-                {
-                    headers: {
-                        "accept": "application/json",
-                        "Content-Type": "application/x-www-form-urlencoded",
-                        "X-Requested-With": "XMLHttpRequest",
-                        "Access-Control-Allow-Origin": "*",
-                    },
-                }
             );
             const data = response.data;
             console.log("Data returned from Events API: ", data);
@@ -72,16 +58,14 @@ export default function EventResults(props) {
         <div>
             <Grid container direction="column" alignItems="flex-start">
 
-                <Grid container direction="row" alignItems="flex-start" al>
-                    <Grid item xs={4}>
+                <Grid container spacing={1} direction="row" alignItems="flex-start" al>
+                    <Grid item>
                         <ArrowBackIosOutlinedIcon style={{ fontSize: 15 }}></ArrowBackIosOutlinedIcon>
+                    </Grid>
+                    <Grid item>
                         <Typography className={classes.text}>
                             <Box fontWeight="fontWeightLight">Back to results</Box>
                         </Typography>
-                    </Grid>
-
-                    <Grid item xs={2}>
-
                     </Grid>
                 </Grid>
 

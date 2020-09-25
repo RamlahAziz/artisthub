@@ -1,12 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import {render, screen, act} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import SearchResults from './SearchResults';
 
 import {unmountComponentAtNode} from "react-dom";
-import SearchBar from "./SearchBar";
 
 let container = null;
 beforeEach(() => {

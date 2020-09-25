@@ -1,12 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import {render, screen, act} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import EventResults from './EventResults';
 
 import {unmountComponentAtNode} from "react-dom";
-import SearchBar from "./SearchBar";
 
 let container = null;
 beforeEach(() => {
@@ -52,12 +50,12 @@ describe('Event Results', () => {
     test('fetches artist events from the API and displays them', async () => {
 
 
-       await act(()=>{
+        await act(() => {
             render(<EventResults artist={"HaLS"}/>);
         })
 
         expect(screen.getAllByText('http://www.facebook.com/253431031498642'));
-       //expect the upcoming event to be in denmark
+        //expect the upcoming event to be in denmark
         expect(screen.getByText(/Denmark/)).toBeInTheDocument();
     });
 });

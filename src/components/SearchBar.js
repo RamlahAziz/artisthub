@@ -4,7 +4,6 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {Grid} from "@material-ui/core";
-import SearchResults from "./SearchResults.js";
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -60,8 +59,7 @@ export default function SearchBar(props) {
         let input = e.target.value;
         setSearchTerm(input);
         //setShowResults(true);
-        // one step late
-        // console.log('onChange search term', searchTerm);
+
     }
 
     const handleKeyPress=(e)=> {
@@ -74,8 +72,7 @@ export default function SearchBar(props) {
         e.preventDefault();
         // setShowResults(true);
         history.push('/results/'+searchTerm);
-        // one step late
-        // console.log('search results bool', searchResults);
+
     }
 
     const handleMouseDown = (event) => {
@@ -113,10 +110,6 @@ export default function SearchBar(props) {
                     </Paper>
                 </FormControl>
             </Grid>
-            {/*<Grid item xs={12} className={classes.grid}>*/}
-            {/*    /!*{showResults ? history.push("/results/:"+searchTerm): null}*!/*/}
-            {/*    {showResults?<SearchResults searchTerm={searchTerm} showResults={showResults}/>:null}*/}
-            {/*</Grid>*/}
         </Grid>
     );
 }

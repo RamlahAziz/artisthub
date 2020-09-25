@@ -6,11 +6,8 @@ import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import ArtistDetails from "./ArtistDetails";
 import Axios from "axios";
 import ArtistEvents from "./ArtistEvents";
-import Box from "@material-ui/core/Box";
-import {BrowserRouter as Router, Link, Switch, Redirect, Route} from "react-router-dom";
-import SwitchBase from "@material-ui/core/internal/SwitchBase";
-import SearchBar from "./SearchBar";
-import { useHistory } from "react-router-dom";
+import { Link} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     text: {
@@ -29,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventResults(props) {
 
-    let history=useHistory();
+    const location = useLocation ();
+    console.log('event results location', location.state);
+    console.log('event results artist', props.artist);
     const classes = useStyles();
 
-    console.log('Event Artist Name', props.artist.name);
+    console.log('Event Artist Name', location.state.name);
 
     const [eventResults, setEventResults] = useState([]);
     //using a proxy to avoid cors errors
@@ -42,9 +41,9 @@ export default function EventResults(props) {
 
     useEffect(() => {
         //data fetching whenever searchterm changes
-        getArtistEvents(props.artist.name);
+        getArtistEvents(location.state.name);
 
-    }, [props.artist]);
+    }, [location.state]);
 
 
     async function getArtistEvents(artistName) {
@@ -67,26 +66,24 @@ export default function EventResults(props) {
 
     return (
         <div>
-            <Grid container className={classes.eventResultGrid} direction="column" alignItems="flex-start">
+            <Grid container spacing={1} alignContent="flex-start" alignItems="flex-start" className={classes.eventResultGrid} direction="column" alignItems="flex-start">
 
-                <Grid item xs={2} spacing={1} flex={"none"} alignContent="flex-start">
+                <Grid item xs={2} flex={"none"} >
                     <Typography className={classes.text}>
-                        {/*<Route path="/"></Route>*/}
-                        {/*I need to go back here and can't figure out how :D*/}
-                        <Link to={`/results/${props.artist.name}`}>
+                        <Link to={`/results/${location.state.name}`}>
                             <ArrowBackIosOutlinedIcon style={{fontSize: 10, margin: 0}}></ArrowBackIosOutlinedIcon>
                             Back to Results</Link>
                     </Typography>
                 </Grid>
 
 
-                <Grid item xs={12} alignContent={"flex-start"}>
-                    <ArtistDetails results={props.artist}></ArtistDetails>
+                <Grid item xs={12} >
+                    <ArtistDetails results={location.state}></ArtistDetails>
                 </Grid>
 
                 <Grid item xs={12}>
                     <Typography className={classes.text} align={"left"}>
-                        {props.artist.upcoming_event_count} upcoming event(s)
+                        {location.state.upcoming_event_count} upcoming event(s)
                     </Typography>
                 </Grid>
 

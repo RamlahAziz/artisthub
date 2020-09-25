@@ -4,7 +4,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import {Grid} from "@material-ui/core";
 import ArtistDetails from "./ArtistDetails";
-import EventResults from "./EventResults";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useHistory } from "react-router-dom";
 
@@ -37,13 +36,8 @@ export default function SearchResults(props) {
 
     // console.log('searchterm',props);
 
-    //let count = 0;
-    //let temp = []
     const [searchResults, setSearchResults] = useState([]);
-    const [showArtistResults, setShowArtistResults] = useState(true);
-    const [selectedArtist, setSelectedArtist] = useState("");
     const [loading, setLoading] = React.useState(true);
-    //using a proxy to avoid cors errors
     const baseUrl = `https://rest.bandsintown.com`;
     const appId = "b2d0af8ea8bfb7288d2701b2d06e9eae";
 
@@ -60,7 +54,7 @@ export default function SearchResults(props) {
             //ask user for proper input
             searchResults.length=0;
             setSearchResults([]);
-            console.log('empty input')
+            // console.log('empty input')
         } else {
             searchResults.length=0;
             setSearchResults([]);
@@ -71,16 +65,9 @@ export default function SearchResults(props) {
 
     function handleClick(e, record) {
         e.preventDefault();
-        console.log('onClick called', record);
-        setShowArtistResults(false);
-        setSelectedArtist(record);
+        // console.log('onClick called', record);
 
-        //THIS IS WHAT I WANT TO DO =================================
-        //eg. the browser is currently showing url : artisthub/results/halsey
-        // i want it to show url :  artisthub/results/halsey/events
-        // and record is the object I need to pass to the new page.
-        // If I do not add a / before events it works idk why
-        history.push("/results/"+ props.searchTerm+"events",record);
+        history.push("/results/"+ props.searchTerm+"/events",record);
     };
 
     async function searchArtists(searchValue) {
@@ -89,7 +76,7 @@ export default function SearchResults(props) {
                 `${baseUrl}/artists/${searchValue}?app_id=${appId}`,
             );
             const data = response.data;
-            console.log("Data returned from API: ", data);
+            // console.log("Data returned from API: ", data);
             if (!data || data.length === 0 || data.hasOwnProperty("error")) {
                 //json object not valid
             } else {
@@ -97,7 +84,7 @@ export default function SearchResults(props) {
                 setSearchResults(searchResults)
             }
 
-            console.log('LATE Array of Search Results ', searchResults);
+            // console.log('LATE Array of Search Results ', searchResults);
 
             setLoading(false);
             // return data;
@@ -113,7 +100,6 @@ export default function SearchResults(props) {
                 <Skeleton animation="wave" variant="text"/>
                 <Skeleton animation="wave" variant="rect"/>
             </div> :
-            showArtistResults ?
                 <div>
 
                     <Grid className={classes.artistResultGrid} container direction="row" alignItems="flex-start">
@@ -125,18 +111,13 @@ export default function SearchResults(props) {
                         </Grid>
                         {searchResults.map((record) => (
                             <Grid item key={record.name} xs onClick={(e) => handleClick(e, record)}>
-                                <ArtistDetails key={record.id} results={record}></ArtistDetails>
+                                <ArtistDetails key={record.id} results={record}/>
                             </Grid>
 
                         ))}
                     </Grid>
-                </div> :
-
-                <div>
-                   <Grid container direction="row" alignItems="flex-start">
-                        <EventResults artist={selectedArtist}></EventResults>
-                    </Grid>
                 </div>
+
     );
 }
 

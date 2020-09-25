@@ -5,7 +5,6 @@ import Divider from "@material-ui/core/Divider";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import {Grid} from "@material-ui/core";
-import Box from '@material-ui/core/Box';
 
 import "fontsource-roboto";
 

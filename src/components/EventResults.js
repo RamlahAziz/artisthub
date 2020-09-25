@@ -72,9 +72,10 @@ export default function EventResults(props) {
                 <Grid item xs={2} spacing={1} flex={"none"} alignContent="flex-start">
                     <Typography className={classes.text}>
                         {/*<Route path="/"></Route>*/}
-                        <a href="/">
+                        {/*I need to go back here and can't figure out how :D*/}
+                        <Link to={`/results/${props.artist.name}`}>
                             <ArrowBackIosOutlinedIcon style={{fontSize: 10, margin: 0}}></ArrowBackIosOutlinedIcon>
-                            Back to search</a>
+                            Back to Results</Link>
                     </Typography>
                 </Grid>
 

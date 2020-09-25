@@ -74,7 +74,13 @@ export default function SearchResults(props) {
         console.log('onClick called', record);
         setShowArtistResults(false);
         setSelectedArtist(record);
-        // history.push("/events/"+props.searchTerm);
+
+        //THIS IS WHAT I WANT TO DO =================================
+        //eg. the browser is currently showing url : artisthub/results/halsey
+        // i want it to show url :  artisthub/results/halsey/events
+        // and record is the object I need to pass to the new page.
+        // If I do not add a / before events it works idk why
+        history.push("/results/"+ props.searchTerm+"events",record);
     };
 
     async function searchArtists(searchValue) {

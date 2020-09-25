@@ -31,6 +31,10 @@ function App() {
                     path="/results/:artist"
                     children={<Child />}
                 />
+                <Route
+                    exact
+                    path={"/results/:artist/events"}
+                    children={<Child2/>}/>
             </Switch>
         </Router>
     </div>
@@ -54,6 +58,17 @@ function App() {
             </Grid>
 
 
+        );
+    }
+
+    function Child2(record) {
+        let artist = useParams();
+        return(
+            <div>
+                <Grid container direction="row" alignItems="flex-start">
+                    <EventResults artist={record}></EventResults>
+                </Grid>
+            </div>
         );
     }
 }

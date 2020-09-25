@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import {Grid} from "@material-ui/core";
 import ArtistDetails from "./ArtistDetails";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import Axios from "axios";
 
@@ -43,7 +43,6 @@ export default function SearchResults(props) {
     const appId = "b2d0af8ea8bfb7288d2701b2d06e9eae";
 
 
-
     useEffect(() => {
         //data fetching whenever search term changes
 
@@ -53,11 +52,11 @@ export default function SearchResults(props) {
         }
         if (!refinedSearchTerm || refinedSearchTerm.length === 0) {
             //ask user for proper input
-            searchResults.length=0;
+            searchResults.length = 0;
             setSearchResults([]);
             // console.log('empty input')
         } else {
-            searchResults.length=0;
+            searchResults.length = 0;
             setSearchResults([]);
             searchArtists(refinedSearchTerm).then();
         }
@@ -68,7 +67,7 @@ export default function SearchResults(props) {
         e.preventDefault();
         // console.log('onClick called', record);
 
-        history.push("/results/"+ props.searchTerm+"/events",record);
+        history.push("/results/" + props.searchTerm + "/events", record);
     };
 
     async function searchArtists(searchValue) {
@@ -101,23 +100,23 @@ export default function SearchResults(props) {
                 <Skeleton animation="wave" variant="text"/>
                 <Skeleton animation="wave" variant="rect"/>
             </div> :
-                <div>
+            <div>
 
-                    <Grid className={classes.artistResultGrid} container direction="row" alignItems="flex-start">
-                        <Grid className={classes.artistResultGrid} item xs={12}>
-                            <Typography color={"textSecondary"} className={classes.text}>
-                                {/*make this depend on input*/}
-                                {searchResults.length} result(s) found for "{props.searchTerm}"
-                            </Typography>
-                        </Grid>
-                        {searchResults.map((record) => (
-                            <Grid item key={record.name} xs onClick={(e) => handleClick(e, record)}>
-                                <ArtistDetails key={record.id} results={record}/>
-                            </Grid>
-
-                        ))}
+                <Grid className={classes.artistResultGrid} container direction="row" alignItems="flex-start">
+                    <Grid className={classes.artistResultGrid} item xs={12}>
+                        <Typography color={"textSecondary"} className={classes.text}>
+                            {/*make this depend on input*/}
+                            {searchResults.length} result(s) found for "{props.searchTerm}"
+                        </Typography>
                     </Grid>
-                </div>
+                    {searchResults.map((record) => (
+                        <Grid item key={record.name} xs onClick={(e) => handleClick(e, record)}>
+                            <ArtistDetails key={record.id} results={record}/>
+                        </Grid>
+
+                    ))}
+                </Grid>
+            </div>
 
     );
 }

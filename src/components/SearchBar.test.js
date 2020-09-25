@@ -36,30 +36,3 @@ it("Render artist search box", () => {
 
 });
 
-it('Display search results for Halsey', async () => {
-    render(<SearchBar />, container);
-
-    // fireEvent.change(screen.getByRole('textbox'), {
-    //     target: { value: 'Halsey' },
-    // });
-
-    //wait for API to get data
-    await userEvent.type(screen.getByRole('textbox'), 'Halsey ');
-    await screen.findByText("http://www.facebook.com/253431031498642");
-    //screen.debug();
-});
-
-
-test('calls the onChange callback handler', async () => {
-    const onChange = jest.fn();
-
-    render(
-        <SearchBar value="" onChange={onChange}>
-            Search:
-        </SearchBar>
-    );
-
-    await userEvent.type(screen.getByRole('textbox'), 'Halsey ');
-    expect(onChange).toHaveBeenCalledTimes(1);
-});
-

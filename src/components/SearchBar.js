@@ -7,8 +7,7 @@ import {Grid} from "@material-ui/core";
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { useHistory } from "react-router-dom";
-
+import {useHistory} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "flex-start",
         width: 'fill',
     },
-    paper:{
+    paper: {
         display: "flex",
         flexWrap: 'wrap',
         alignItems: "left",
@@ -33,8 +32,8 @@ const useStyles = makeStyles((theme) => ({
     },
     //========================== how to get border color on focus to change??
     input: {
-        outlineColor:'#000000',
-        color:'secondary',
+        outlineColor: '#000000',
+        color: 'secondary',
         borderColor: '#80bdff',
         // '&$focused':{
         //     borderColor: '#80bdff'
@@ -62,16 +61,16 @@ export default function SearchBar(props) {
 
     }
 
-    const handleKeyPress=(e)=> {
+    const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-           search(e);
+            search(e);
         }
     }
 
     const search = (e) => {
         e.preventDefault();
         // setShowResults(true);
-        history.push('/results/'+searchTerm);
+        history.push('/results/' + searchTerm);
 
     }
 
@@ -84,28 +83,28 @@ export default function SearchBar(props) {
             <Grid item xs={12} className={classes.grid}>
                 <FormControl className={classes.textField} variant="outlined">
                     <Paper className={classes.paper} elevation={2}>
-                        <OutlinedInput classes={{focused : classes.input}}
-                            id="search-artist-input"
-                            type= 'text'
-                            placeholder = 'Search Artist Name'
-                            value={searchTerm}
-                            onChange={(e) => handleChange(e)}
-                                       onKeyPress={(e)=>handleKeyPress(e)}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="search icon"
-                                        onClick={search}
-                                        //onMouseDown={}
-                                        aria-autocomplete={"both"}
-                                        onMouseDown={handleMouseDown}
-                                        edge="end"
-                                    >
-                                        <SearchIcon />
+                        <OutlinedInput classes={{focused: classes.input}}
+                                       id="search-artist-input"
+                                       type='text'
+                                       placeholder='Search Artist Name'
+                                       value={searchTerm}
+                                       onChange={(e) => handleChange(e)}
+                                       onKeyPress={(e) => handleKeyPress(e)}
+                                       endAdornment={
+                                           <InputAdornment position="end">
+                                               <IconButton
+                                                   aria-label="search icon"
+                                                   onClick={search}
+                                                   //onMouseDown={}
+                                                   aria-autocomplete={"both"}
+                                                   onMouseDown={handleMouseDown}
+                                                   edge="end"
+                                               >
+                                                   <SearchIcon/>
 
-                                    </IconButton>
-                                </InputAdornment>
-                            }
+                                               </IconButton>
+                                           </InputAdornment>
+                                       }
                         />
                     </Paper>
                 </FormControl>

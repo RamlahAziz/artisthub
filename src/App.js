@@ -37,12 +37,12 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "center",
-        width:"100%",
+        width: "100%",
     },
     DivContainer: {
         justifyContent: "center",
         alignItems: "center",
-        alignContent:"center",
+        alignContent: "center",
         flexDirection: "column",
         padding: theme.spacing(2),
     },
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(12),
         justifyContent: "center",
         alignItems: "center",
-        alignContent:"center",
+        alignContent: "center",
         flexDirection: "column",
     }
 
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
 
-const classes = useStyles();
+    const classes = useStyles();
     return (
         <div className={classes.App}>
 
@@ -121,9 +121,9 @@ const classes = useStyles();
     function Child2() {
         let artist = useParams();
         return (
-                <Grid container direction="row" alignItems="flex-start">
-                    <EventResults artist={artist}/>
-                </Grid>
+            <Grid container direction="row" alignItems="flex-start">
+                <EventResults artist={artist}/>
+            </Grid>
         );
     }
 }

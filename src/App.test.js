@@ -4,6 +4,7 @@ import {  unmountComponentAtNode } from "react-dom";//render,
 import { act } from "react-dom/test-utils";
 
 import App from './App';
+import SearchBar from "./components/SearchBar";
 
 let container = null;
 beforeEach(() => {
@@ -25,8 +26,11 @@ afterEach(() => {
 //   expect(linkElement).toBeInTheDocument();
 // });
 
-it("render app", () => {
+it("render app landing page", () => {
   act(() => {
     render(<App />, container);
+    expect(screen.getByText(/Enter your favourite artist/)).toBeVisible();
+    expect(screen.getByPlaceholderText(/Search Artist Name/)).toBeInTheDocument();
+
   });
 });

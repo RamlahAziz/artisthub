@@ -2,8 +2,9 @@
 I contacted Bands In Town for a Student API at their [Support Page](https://www.artists.bandsintown.com/support/api-installation) and they replied on 21 Sep, 2020 with an API key (b2d0af8ea8bfb7288d2701b2d06e9eae) I can use for 3 months. This is used for all API calls in the application.
 
 ## 2. Deployment
-Application was previously deployed to [gh-pages](https://ramlahaziz.github.io/artisthub).
-It has also been deployed on [Netlify]().
+Application has been deployed to gh-pages. https://ramlahaziz.github.io/artisthub.
+It can also been deployed on Netlify by tweaking a few settings. I have done that too at https://artisthub.netlify.app/. 
+More details at [![Netlify Status](https://api.netlify.com/api/v1/badges/55449595-1d68-41c0-8fd4-8371e1039d9a/deploy-status)](https://app.netlify.com/sites/artisthub/deploys)
 
 
 ## 3. Run 

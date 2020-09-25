@@ -1,3 +1,5 @@
+//Displays the artist name and facebook url in a card
+// is passed one artist object as retrieved from API as a card
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -17,20 +19,14 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: red[500],
     },
     text:{
-        //fontFamily: "Roboto",
-        //textAlign: "left",
         fontSize: 12,
-        // "7a7f80"
     },
 }));
 
-//import DialogForm from "./EMRMakerByDocForm";
-//<DialogForm patientMy={props.record} doctorMy={props.doctor}/>
 
 export default function ArtistDetails(props) {
 
-    //rendered twice?
-    console.log("Artist Details", props.results);
+    // console.log("Artist Details", props.results);
     const classes = useStyles();
     return (
 

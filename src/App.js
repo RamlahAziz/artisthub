@@ -75,9 +75,6 @@ function App() {
                                 />
                             </div>
                         </div>
-
-
-                        {/*<SearchBar searchTerm={""}/>*/}
                     </Route>
                     <Route exact path="/artisthub">
                         <Redirect to="/"/>

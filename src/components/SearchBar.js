@@ -1,3 +1,6 @@
+//Handles user input and triggers search function
+// calls the url /results/searchTerm
+
 import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";

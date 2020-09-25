@@ -1,3 +1,6 @@
+//Fetches and displays the artists matching the searchTerm
+//is given searchTerm as props
+// URL /results/searchTerm
 import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 

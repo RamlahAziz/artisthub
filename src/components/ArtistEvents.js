@@ -1,3 +1,5 @@
+//displays one event in a card, with country, date, city and venue
+//is passed one event as props
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ArtistEvents(props) {
-    console.log('Artist Event Details: ', props);
+    // console.log('Artist Event Details: ', props);
     const classes = useStyles();
 
     const months = [
@@ -84,7 +86,6 @@ export default function ArtistEvents(props) {
                                         color={"textSecondary"}>{props.event.venue.city}</Typography>
                         </Grid>
                     </Grid>
-                    <Grid></Grid>
                     <Grid container direction="row">
                         <Grid item xs={6}>
                             <Typography  className={classes.text}>Venue</Typography>

@@ -1,3 +1,6 @@
+//Fetches and displays all the events of a particular artist
+//Is passed the artist object as props
+//URL: /results/artistName/events/ page
 import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -27,11 +30,11 @@ const useStyles = makeStyles((theme) => ({
 export default function EventResults(props) {
 
     const location = useLocation ();
-    console.log('event results location', location.state);
-    console.log('event results artist', props.artist);
+    // console.log('event results location', location.state);
+    // console.log('event results artist', props.artist);
     const classes = useStyles();
 
-    console.log('Event Artist Name', location.state.name);
+    // console.log('Event Artist Name', location.state.name);
 
     const [eventResults, setEventResults] = useState([]);
     //using a proxy to avoid cors errors
@@ -52,10 +55,10 @@ export default function EventResults(props) {
                 `${baseUrl}/artists/${artistName}/events?app_id=${appId}&date=upcoming`,
             );
             const data = response.data;
-            console.log("Data returned from Events API: ", data);
+            // console.log("Data returned from Events API: ", data);
             // eventResults.push(data);
             setEventResults(data)
-            console.log('Array of Search Results ', eventResults);
+            // console.log('Array of Search Results ', eventResults);
 
             // return data;
         } catch (error) {

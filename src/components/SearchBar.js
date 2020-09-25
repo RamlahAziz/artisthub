@@ -8,6 +8,8 @@ import SearchResults from "./SearchResults.js";
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import { useHistory } from "react-router-dom";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -16,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         alignItems: "flex-start",
         width: 'fill',
-        backgroundColor: "aliceblue",
-        paddingTop: theme.spacing(12),
-        paddingLeft: theme.spacing(12),
     },
     paper:{
         display: "flex",
@@ -38,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
         outlineColor:'#000000',
         color:'secondary',
         borderColor: '#80bdff',
-        '&$focused':{
-            borderColor: '#80bdff'
-        }
+        // '&$focused':{
+        //     borderColor: '#80bdff'
+        // }
     },
     grid: {
         //paddingLeft: theme.spacing(12),
@@ -48,24 +47,33 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function SearchBar() {
+export default function SearchBar(props) {
+
+    let history = useHistory();
 
     const classes = useStyles();
-    const [searchTerm, setSearchTerm] = useState("");
-    const [showResults, setShowResults] = useState(false);
+    const [searchTerm, setSearchTerm] = useState(props.searchTerm);//props.artistName
+    // const [showResults, setShowResults] = useState();
 
     function handleChange(e) {
         // e.preventDefault();
         let input = e.target.value;
         setSearchTerm(input);
-        setShowResults(true);
+        //setShowResults(true);
         // one step late
         // console.log('onChange search term', searchTerm);
     }
 
+    const handleKeyPress=(e)=> {
+        if (e.key === 'Enter') {
+           search(e);
+        }
+    }
+
     const search = (e) => {
         e.preventDefault();
-        setShowResults(true);
+        // setShowResults(true);
+        history.push('/results/'+searchTerm);
         // one step late
         // console.log('search results bool', searchResults);
     }
@@ -85,6 +93,7 @@ export default function SearchBar() {
                             placeholder = 'Search Artist Name'
                             value={searchTerm}
                             onChange={(e) => handleChange(e)}
+                                       onKeyPress={(e)=>handleKeyPress(e)}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -104,9 +113,10 @@ export default function SearchBar() {
                     </Paper>
                 </FormControl>
             </Grid>
-            <Grid item xs={12} className={classes.grid}>
-                {showResults ? <SearchResults searchTerm={searchTerm} showResults={showResults}/> : null}
-            </Grid>
+            {/*<Grid item xs={12} className={classes.grid}>*/}
+            {/*    /!*{showResults ? history.push("/results/:"+searchTerm): null}*!/*/}
+            {/*    {showResults?<SearchResults searchTerm={searchTerm} showResults={showResults}/>:null}*/}
+            {/*</Grid>*/}
         </Grid>
     );
 }

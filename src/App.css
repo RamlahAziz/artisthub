@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: auto;
+  background-color: #61dafb;
+  padding-top:  20vmin;
+  padding-left: 20vmin;
 }
 
 .App-logo {

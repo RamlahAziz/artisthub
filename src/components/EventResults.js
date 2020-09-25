@@ -7,6 +7,10 @@ import ArtistDetails from "./ArtistDetails";
 import Axios from "axios";
 import ArtistEvents from "./ArtistEvents";
 import Box from "@material-ui/core/Box";
+import {BrowserRouter as Router, Link, Switch, Redirect, Route} from "react-router-dom";
+import SwitchBase from "@material-ui/core/internal/SwitchBase";
+import SearchBar from "./SearchBar";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     text: {
@@ -14,11 +18,18 @@ const useStyles = makeStyles((theme) => ({
         padding: 10,
         fontSize: 15,
     },
+    eventResultGrid: {
+        alignContent: "flex-start",
+        alignItems: "stretch",
+        flexFlow: "row wrap",
+        height: "100%",
+    },
 
 }));
 
 export default function EventResults(props) {
 
+    let history=useHistory();
     const classes = useStyles();
 
     console.log('Event Artist Name', props.artist.name);
@@ -56,17 +67,15 @@ export default function EventResults(props) {
 
     return (
         <div>
-            <Grid container direction="column" alignItems="flex-start">
+            <Grid container className={classes.eventResultGrid} direction="column" alignItems="flex-start">
 
-                <Grid container spacing={1} direction="row" alignItems="flex-start" al>
-                    <Grid item>
-                        <ArrowBackIosOutlinedIcon style={{ fontSize: 15 }}></ArrowBackIosOutlinedIcon>
-                    </Grid>
-                    <Grid item>
-                        <Typography className={classes.text}>
-                            <Box fontWeight="fontWeightLight">Back to results</Box>
-                        </Typography>
-                    </Grid>
+                <Grid item xs={2} spacing={1} flex={"none"} alignContent="flex-start">
+                    <Typography className={classes.text}>
+                        {/*<Route path="/"></Route>*/}
+                        <a href="/">
+                            <ArrowBackIosOutlinedIcon style={{fontSize: 10, margin: 0}}></ArrowBackIosOutlinedIcon>
+                            Back to search</a>
+                    </Typography>
                 </Grid>
 
 
@@ -75,16 +84,16 @@ export default function EventResults(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Typography className={classes.text}>
+                    <Typography className={classes.text} align={"left"}>
                         {props.artist.upcoming_event_count} upcoming event(s)
                     </Typography>
                 </Grid>
 
             </Grid>
 
-            <Grid container direction="row" alignItems="flex-start">
+            <Grid container className={classes.eventResultGrid} direction="row">
                 {eventResults.map((record) => (
-                    <Grid item xs="4">
+                    <Grid item xs key={record.id}>
                         <ArtistEvents event={record}></ArtistEvents>
                     </Grid>
 

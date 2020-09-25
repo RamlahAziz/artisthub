@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
         margin: 10,
         textAlign: "left",
         padding: 10,
+        fontSize: 14,
     },
     artistResultGrid: {
         alignContent: "flex-start",
@@ -104,7 +105,7 @@ export default function SearchResults(props) {
 
                     <Grid className={classes.artistResultGrid} container direction="row" alignItems="flex-start">
                         <Grid className={classes.artistResultGrid} item xs={12}>
-                            <Typography className={classes.text}>
+                            <Typography color={"textSecondary"} className={classes.text}>
                                 {/*make this depend on input*/}
                                 {searchResults.length} result(s) found for "{props.searchTerm}"
                             </Typography>

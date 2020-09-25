@@ -82,7 +82,7 @@ export default function EventResults(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Typography className={classes.text} align={"left"}>
+                    <Typography className={classes.text}  color={"textSecondary"} align={"left"}>
                         {location.state.upcoming_event_count} upcoming event(s)
                     </Typography>
                 </Grid>

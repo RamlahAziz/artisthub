@@ -3,7 +3,8 @@ I contacted Bands In Town for a Student API at their [Support Page](https://www.
 
 ## 2. Deployment
 Application was previously deployed to [gh-pages](https://ramlahaziz.github.io/artisthub).
-It has also been deployed on [Netlify]().
+It has also been deployed on Netlify.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/36fdf1d9-e260-484c-863d-36f6871f65df/deploy-status)](https://app.netlify.com/sites/artisthub/deploys)
 
 
 ## 3. Run 

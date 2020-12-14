@@ -1,14 +1,14 @@
 //Fetches and displays the artists matching the searchTerm
 //is given searchTerm as props
 // URL /results/searchTerm
-import React, {useEffect, useState} from "react";
-import {makeStyles} from "@material-ui/core/styles";
+import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
-import {Grid} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import ArtistDetails from "./ArtistDetails";
 import Skeleton from "@material-ui/lab/Skeleton";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Axios from "axios";
 
@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
         margin: 10,
         textAlign: "left",
         padding: 10,
-        fontSize: 14,
+        fontWeight: 400,
+        color: "#ffffff",
     },
     artistResultGrid: {
         alignContent: "flex-start",
@@ -26,15 +27,13 @@ const useStyles = makeStyles((theme) => ({
     },
     root: {
         display: "flex",
-        flexWrap: 'wrap',
+        flexWrap: "wrap",
         alignItems: "left",
-        width: 'fill',
-    }
-
+        width: "fill",
+    },
 }));
 
 export default function SearchResults(props) {
-
     const classes = useStyles();
     let history = useHistory();
 
@@ -42,11 +41,39 @@ export default function SearchResults(props) {
 
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = React.useState(true);
-    const baseUrl = `https://rest.bandsintown.com`;
-    const appId = "b2d0af8ea8bfb7288d2701b2d06e9eae";
-
 
     useEffect(() => {
+        const baseUrl = `https://rest.bandsintown.com`;
+        const appId = "b2d0af8ea8bfb7288d2701b2d06e9eae";
+
+        async function searchArtists(searchValue) {
+            try {
+                const response = await Axios.get(
+                    `${baseUrl}/artists/${searchValue}?app_id=${appId}`
+                );
+                const data = response.data;
+                // console.log("Data returned from API: ", data);
+                if (
+                    !data ||
+                    data.length === 0 ||
+                    data.hasOwnProperty("error")
+                ) {
+                    //json object not valid
+                } else {
+                    searchResults.push(data);
+                    setSearchResults(searchResults);
+                }
+
+                // console.log('LATE Array of Search Results ', searchResults);
+
+                setLoading(false);
+                // return data;
+            } catch (error) {
+                // If an error occurred we log it to the console
+                console.error("Request Failed: ", error);
+            }
+        }
+
         //data fetching whenever search term changes
 
         let refinedSearchTerm = props.searchTerm;
@@ -63,7 +90,6 @@ export default function SearchResults(props) {
             setSearchResults([]);
             searchArtists(refinedSearchTerm).then();
         }
-
     }, [props.searchTerm]);
 
     function handleClick(e, record) {
@@ -71,56 +97,42 @@ export default function SearchResults(props) {
         // console.log('onClick called', record);
 
         history.push("/results/" + props.searchTerm + "/events", record);
-    };
-
-    async function searchArtists(searchValue) {
-        try {
-            const response = await Axios.get(
-                `${baseUrl}/artists/${searchValue}?app_id=${appId}`,
-            );
-            const data = response.data;
-            // console.log("Data returned from API: ", data);
-            if (!data || data.length === 0 || data.hasOwnProperty("error")) {
-                //json object not valid
-            } else {
-                searchResults.push(data);
-                setSearchResults(searchResults)
-            }
-
-            // console.log('LATE Array of Search Results ', searchResults);
-
-            setLoading(false);
-            // return data;
-        } catch (error) {
-            // If an error occurred we log it to the console
-            console.error("Request Failed: ", error);
-        }
     }
 
-    return (
-        loading ?
-            <div className={classes.root}>
-                <Skeleton animation="wave" variant="text"/>
-                <Skeleton animation="wave" variant="rect"/>
-            </div> :
-            <div>
-
-                <Grid className={classes.artistResultGrid} container direction="row" alignItems="flex-start">
-                    <Grid className={classes.artistResultGrid} item xs={12}>
-                        <Typography color={"textSecondary"} className={classes.text}>
-                            {/*make this depend on input*/}
-                            {searchResults.length} result(s) found for "{props.searchTerm}"
-                        </Typography>
-                    </Grid>
-                    {searchResults.map((record) => (
-                        <Grid item key={record.name} xs onClick={(e) => handleClick(e, record)}>
-                            <ArtistDetails key={record.id} results={record}/>
-                        </Grid>
-
-                    ))}
+    return loading ? (
+        <div className={classes.root}>
+            <Skeleton animation='wave' variant='text' />
+            <Skeleton animation='wave' variant='rect' />
+        </div>
+    ) : (
+        <div>
+            <Grid
+                className={classes.artistResultGrid}
+                container
+                direction='row'
+                alignItems='flex-start'
+            >
+                <Grid className={classes.artistResultGrid} item xs={12}>
+                    <Typography
+                        color={"textSecondary"}
+                        className={classes.text}
+                    >
+                        {/*make this depend on input*/}
+                        {searchResults.length} result(s) found for "
+                        {props.searchTerm}"
+                    </Typography>
                 </Grid>
-            </div>
-
+                {searchResults.map((record) => (
+                    <Grid
+                        item
+                        key={record.name}
+                        xs
+                        onClick={(e) => handleClick(e, record)}
+                    >
+                        <ArtistDetails key={record.id} results={record} />
+                    </Grid>
+                ))}
+            </Grid>
+        </div>
     );
 }
-

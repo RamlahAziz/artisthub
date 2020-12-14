@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6305e786580bc47c47f8e9714d0db7fe",
+    "revision": "3137f4e3fbb5520859f04625d5a4b650",
     "url": "/artisthub/index.html"
   },
   {
-    "revision": "631d7fe2c6ee77af133f",
+    "revision": "5d18a0ad56de09ed928c",
     "url": "/artisthub/static/css/2.73004091.chunk.css"
   },
   {
-    "revision": "5f53c90c6ffcb0efcfa1",
-    "url": "/artisthub/static/css/main.c6ef6b71.chunk.css"
+    "revision": "b5ca33ddbb274c2f3222",
+    "url": "/artisthub/static/css/main.9ae43368.chunk.css"
   },
   {
-    "revision": "631d7fe2c6ee77af133f",
-    "url": "/artisthub/static/js/2.5af0f8ff.chunk.js"
+    "revision": "5d18a0ad56de09ed928c",
+    "url": "/artisthub/static/js/2.f4c5e8e9.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/artisthub/static/js/2.5af0f8ff.chunk.js.LICENSE.txt"
+    "url": "/artisthub/static/js/2.f4c5e8e9.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5f53c90c6ffcb0efcfa1",
-    "url": "/artisthub/static/js/main.176449e5.chunk.js"
+    "revision": "b5ca33ddbb274c2f3222",
+    "url": "/artisthub/static/js/main.e1da143d.chunk.js"
   },
   {
     "revision": "fa818f83e66434c945ed",
